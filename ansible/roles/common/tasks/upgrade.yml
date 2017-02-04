@@ -1,8 +1,9 @@
 ---
-- name: Update Cache
+- name: upgrade | Update Cache
   apt: update_cache=yes cache_valid_time=3600
 
-- name: Safe Upgrade all Packages
+- name: upgrade | Safe Upgrade all Packages
   apt: upgrade=yes update_cache=yes cache_valid_time=86400
-  sudo: true
+  become: true
+  become_method: sudo
 

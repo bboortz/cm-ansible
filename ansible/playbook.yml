@@ -2,10 +2,12 @@
 - hosts: local
   connection: local
   remote_user: root
-  sudo: yes
+  become_method: sudo
 
   vars_files:
     - variables.yml
 
   roles:
     - common       # List of essential packages
+    - docker       # install and configure docker
+
