@@ -1,0 +1,3 @@
+---
+- name: packages | Install lists packages
+  script: create_dirs.sh
