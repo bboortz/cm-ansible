@@ -1,0 +1,11 @@
+---
+- hosts: local
+  connection: local
+  remote_user: root
+  sudo: yes
+
+  vars_files:
+    - variables.yml
+
+  roles:
+    - common       # List of essential packages

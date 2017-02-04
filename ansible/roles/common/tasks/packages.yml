@@ -1,0 +1,23 @@
+---
+- name: Package | Install lists packages
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - aptitude
+    - bash-completion
+    - openssh-server
+    - vim
+    - git
+    - curl
+    - wget
+    - tree
+    - lsof
+    - screen
+    - rsync
+    - strace
+    - fail2ban
+    - htop
+    - zip 
+    - unzip
+    - tar
+    - gzip
+    - bzip2
