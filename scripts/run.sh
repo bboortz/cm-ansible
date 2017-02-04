@@ -2,6 +2,11 @@
 
 set -i
 set -u
-export PS1='$ '
 
-.venv/bin/ansible-playbook -v -i ansible/hosts -c local ansible/playbook.yml
+OLD_DIR=$( pwd )
+CM_DIR=$( readlink -f ${0%/*/*} )
+
+cd ${CM_DIR}/ansible
+${CM_DIR}/.venv/bin/ansible-playbook -v -i hosts -c local playbook.yml
+
+cd "$OLD_DIR"
