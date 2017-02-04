@@ -9,8 +9,9 @@
 
   roles:
     - common       # List of essential packages
+    - home         # prepare and configure home directory
     - docker       # install and configure docker
-#    - c		   # c and tools
+#    - c            # c and tools
     - python       # python and tools
     - golang       # golang and tools
 

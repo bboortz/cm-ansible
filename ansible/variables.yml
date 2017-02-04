@@ -1,5 +1,6 @@
 ---
 user: mint
-user_home: /home/$user
+user_home: /home/{{ user }}
+dotfiles: "{{ user_home }}/files/dotfiles"
 
 ntp_server: ntp1.ptb.de
