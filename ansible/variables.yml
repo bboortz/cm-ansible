@@ -1,3 +1,5 @@
 ---
 user: mint
 user_home: /home/$user
+
+ntp_server: ntp1.ptb.de

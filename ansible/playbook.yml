@@ -10,4 +10,7 @@
   roles:
     - common       # List of essential packages
     - docker       # install and configure docker
+#    - c		   # c and tools
+    - python       # python and tools
+    - golang       # golang and tools
 

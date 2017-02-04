@@ -6,3 +6,6 @@
 - name: apt-update
   apt: update_cache=yes
   become_method: sudo
+
+- name: Restart ntp
+  service: name=ntp state=restarted
