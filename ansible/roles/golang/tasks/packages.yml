@@ -1,0 +1,7 @@
+---
+- name: packages | Install lists packages
+  apt: pkg={{ item }} state=installed
+  become: true
+  become_method: sudo
+  with_items:
+    - golang
