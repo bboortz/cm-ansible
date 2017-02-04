@@ -1,0 +1,20 @@
+---
+- name: ntp | Install
+  apt: name=ntp state=present
+  tags: ntp
+  become: true
+  become_method: sudo
+
+- name: ntp | Configure ntp file
+  template: src=ntp.conf.j2 dest=/etc/ntp.conf
+  tags: ntp
+  notify: Restart ntp
+  become: true
+  become_method: sudo
+
+- name: ntp | Start the ntp service
+  service: name=ntp state=started enabled=true
+  tags: ntp
+  become: true
+  become_method: sudo
+
