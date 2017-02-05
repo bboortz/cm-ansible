@@ -16,3 +16,5 @@
     - python       # python and tools
     - golang       # golang and tools
 
+# https://github.com/briangershon/linux-desktop-ansible
+#- include: ../../linux-desktop-private/playbook.yml
