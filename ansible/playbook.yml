@@ -10,8 +10,8 @@
   roles:
     - common       # List of essential packages
     - home         # prepare and configure home directory
-    - user         # create user
     - docker       # install and configure docker
+    - user         # create user
 #    - c            # c and tools
     - python       # python and tools
     - golang       # golang and tools
