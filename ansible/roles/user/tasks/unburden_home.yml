@@ -1,0 +1,12 @@
+- name: unburden_home | enable unburden-home-dir
+  become: yes
+  lineinfile: > 
+    dest=/etc/default/unburden-home-dir
+    regexp=^UNBURDEN_HOME
+    line=UNBURDEN_HOME=true
+    
+- name: unburden_home | configure unburden-home-dir
+  become: yes
+  copy: >
+    src=templates/unburden-home-dir.list
+    dest=/etc/unburden-home-dir.list
