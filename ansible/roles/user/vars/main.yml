@@ -1,0 +1,17 @@
+---
+pre_puppet_users:
+  - {
+      name: usera,
+      comment: "usera",
+      groups: sudo,docker,
+      shell: /bin/bash,
+      state: present
+    }
+  - {
+      name: userb,
+      comment: "userb",
+      groups: docker,
+      shell: /bin/bash,
+      state: present
+    }
+

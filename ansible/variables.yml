@@ -1,6 +1,7 @@
 ---
-user: mint
+user: "{{ ansible_ssh_user }}"
 user_home: /home/{{ user }}
 dotfiles: "{{ user_home }}/files/dotfiles"
 
 ntp_server: ntp1.ptb.de
+
