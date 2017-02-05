@@ -1,0 +1,2 @@
+#deb cdrom:[Linux Mint 18 _Sarah_ - Release amd64 20160628]/ xenial contrib main non-free
+#deb http://ppa.launchpad.net/mutse-young/remastersys/ubuntu xenial main

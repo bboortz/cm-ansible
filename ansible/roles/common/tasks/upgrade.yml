@@ -1,4 +1,15 @@
 ---
+- name: upgrade | copy APT sources list file
+  become: true
+  copy: >
+    src=templates/sources.list dest=/etc/apt/
+    owner=root mode=644
+
+#- name: upgrade | copy APT sources list directory
+  #become: true
+  #copy: src=$item dest=/etc/apt/sources.list.d/ owner=root mode=644
+  #with_fileglob: templates/sources.list.d/*
+
 - name: upgrade | Update Cache
   apt: update_cache=yes cache_valid_time=3600
   become: true
