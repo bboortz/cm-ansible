@@ -9,7 +9,7 @@ CM_DIR=$( readlink -f ${0%/*/*} )
 
 
 sudo apt-get update && apt-get upgrade -y
-sudo apt-get install -y git python python-dev openssh-server libyaml-cpp-dev libssl-dev gcc virtualenv gcc 
+sudo apt-get install -y aptitude git python python-dev python-apt openssh-server libyaml-cpp-dev libssl-dev gcc virtualenv gcc
 
 cd ${CM_DIR}
 virtualenv .venv
