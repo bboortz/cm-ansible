@@ -5,8 +5,8 @@ Config Management with ansible. Whitit you are able to manage your own linux dis
 ## Status
 
 ### Build
+<a href='https://travis-ci.org/sebdah/git-pylint-commit-hook'><img src='https://travis-ci.org/bboortz/cm-ansible.svg?branch=master'></a>
 
-https://travis-ci.org/bboortz/cm-ansible.svg?branch=master
 
 ### Tested for
 * Ubuntu 16.06
@@ -22,6 +22,7 @@ https://travis-ci.org/bboortz/cm-ansible.svg?branch=master
 * git clone https://github.com/bboortz/cm-ansible.git
 * cd cm-ansible
 * ./scripts/install_dependencies.sh
+
 
 ### Run
 
