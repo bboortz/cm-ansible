@@ -31,10 +31,13 @@ cd cm-ansible
 
 ### Run
 
-Running the config managment:
-
+* Running the config managment for a generic:
 ```bash
-./bin/cm.sh
+./bin/cm.sh <playbook>
+```
+* Running deploy playbook
+```bash
+./bin/cm.sh deploy
 ```
 
 
