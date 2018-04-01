@@ -79,7 +79,7 @@ f_bootstrap() {
 f_playbook() {
 	local playbook="${ANSIBLEDIR}/playbook.yml"
 	f_info "running playbook $playbook ..."
-	ansible-playbook -i "${ANSIBLEDIR}/hosts" -c local "${playbook}" -K $VERBOSE
+	ansible-playbook -i "${ANSIBLEDIR}/hosts" -c local "${playbook}" $VERBOSE
 }
 
 

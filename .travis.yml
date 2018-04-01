@@ -8,6 +8,5 @@ python:
 install:
   - pip install --upgrade -r requirements.txt
 script: 
-  - make test
   - ./cm.sh
 
