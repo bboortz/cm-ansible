@@ -2,4 +2,5 @@ pip
 ansible
 ansible-vault
 ansible-lint
+docker
 docker-py
