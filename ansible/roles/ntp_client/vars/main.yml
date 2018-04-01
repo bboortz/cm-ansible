@@ -1,2 +1,3 @@
 ---
 # vars file for os
+ntp_service: ntp

@@ -15,10 +15,15 @@
   meta: end_play
   when: whoami.stdout != "root"
 
+- name: Set ntp_service Variable
+  set_fact:
+    ntp_service: "ntpd"
+  when: ansible_os_family == 'Archlinux'
+
 - name: ntp | Configure ntp file
   template: src=ntp.conf.j2 dest=/etc/ntp.conf
   tags: ntp
   notify: Restart ntp
 - name: ntp | Start the ntp service
-  service: name=ntpd state=started enabled=true
+  service: name={{ ntp_service }} state=started enabled=true
   tags: ntp
