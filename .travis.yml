@@ -10,8 +10,8 @@ env:
     version: 16.04
   - distro: debian
     version: latest
-  - distro: base/archlinux
-    version: latest
+#  - distro: base/archlinux
+#    version: latest
 
 # Tell Travis to start Docker when it brings up an environment.
 services:
