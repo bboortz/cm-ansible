@@ -25,11 +25,11 @@ f_error() {
 
 f_install_packages_deb() {
 	apt-get update
-	DEBIAN_FRONTEND=noninteractive apt-get install -y python python-virtualenv 
+	DEBIAN_FRONTEND=noninteractive apt-get install -y python python-virtualenv docker
 }
 
 f_install_packages_arch() {
-	pacman -Syu --noconfirm --needed python python-virtualenv
+	pacman -Syu --noconfirm --needed python python-virtualenv docker
 }
 
 
