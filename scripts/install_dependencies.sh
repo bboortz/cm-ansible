@@ -23,6 +23,15 @@ f_error() {
 	echo "ERROR: $@"
 }
 
+f_install_packages_deb() {
+	apt-get update
+	DEBIAN_FRONTEND=noninteractive apt-get install -y python python-virtualenv 
+}
+
+f_install_packages_arch() {
+	pacman -Syu --noconfirm --needed python python-virtualenv
+}
+
 
 
 #
@@ -31,18 +40,16 @@ f_error() {
 {
 	case $OS in
 		debian)
+			f_info "known operating system detected: $OS"
+			which python > /dev/null 2>&1 && which virtualenv > /dev/null 2>&1 || f_install_packages_deb
+			;;
 		ubuntu)
 			f_info "known operating system detected: $OS"
-			which python > /dev/null 2>&1 && which virtualenv > /dev/null 2>&1 || (
-				apt-get update
-				DEBIAN_FRONTEND=noninteractive apt-get install -y python python-virtualenv 
-			)
+			which python > /dev/null 2>&1 && which virtualenv > /dev/null 2>&1 || f_install_packages_deb
 			;;
 		arch)
-			which python > /dev/null 2>&1 && which virtualenv > /dev/null 2>&1 || (
-				f_info "known operating system detected: $OS"
-				pacman -Sy --noconfirm --needed python python-virtualenv
-			)
+			f_info "known operating system detected: $OS"
+			which python > /dev/null 2>&1 && which virtualenv > /dev/null 2>&1 || f_install_packages_arch
 			;;
 		*)
 			f_error "unknown operating system detected: $OS"
