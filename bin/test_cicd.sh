@@ -9,4 +9,4 @@ DOCKER_MOUNTS="-v $(pwd)/ansible:/code/ansible -v $(pwd)/bin:/code/bin -v $(pwd)
 echo
 echo "INFO: testing in docker image: ${DOCKER_IMAGE}"
 
-docker run -t $DOCKER_MOUNTS "${DOCKER_IMAGE}" /bin/bash -c '/code/scripts/install_dependencies.sh && /code/bin/cm.sh'
+docker run -t $DOCKER_MOUNTS "${DOCKER_IMAGE}" /bin/bash -c '/code/scripts/install_dependencies.sh && /code/bin/cm.sh deploy'
