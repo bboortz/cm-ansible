@@ -11,7 +11,7 @@
     - role: package_install
       package_list: "{{ package_install.package_list }}"
     - role: ntp_client
-      ntp_server: ${{ ntp_client.ntp_server }}"
+      ntp_server: "{{ ntp_client.ntp_server }}"
 #    - common       # List of essential packages
 #    - home         # prepare and configure home directory
 #    - docker       # install and configure docker
