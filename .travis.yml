@@ -21,7 +21,7 @@ before_install:
 
 script:
   # Start the container from the image and perform tests.
-  - DOCKER_IMAGE="${distro}:${version" ./test.sh
+  - DOCKER_IMAGE="${distro}:${version}" ./test.sh
 
 notifications:
   # Notify Ansible Galaxy when a role builds successfully.
