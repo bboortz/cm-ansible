@@ -12,7 +12,7 @@ export PS1='$ '
 
 # directories
 CURDIR="$( readlink -f ${0%/*} )"
-ROOTDIR="${CURDIR%/*}"
+ROOTDIR="${CURDIR}"
 VENVDIR="${ROOTDIR}/.venv"
 ANSIBLEDIR="${ROOTDIR}/ansible"
 

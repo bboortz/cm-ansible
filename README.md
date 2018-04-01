@@ -37,18 +37,20 @@ cd cm-ansible
 ```
 * Running deploy playbook
 ```bash
-./bin/cm.sh deploy
+./cm.sh deploy
 ```
 
 
 ### Testing
 
-* local testing
+* normal / containerized testing
+```bash
+./cm.sh test
+```
+
+* local testing different cases
 ```bash
 ./bin/test_local.sh
 ```
-* CI/CD based testing (Travis CI is also calling this script)
-```bash
-./bin/test_cicd.sh
 ```
 

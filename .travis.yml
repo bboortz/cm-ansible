@@ -23,7 +23,7 @@ before_install:
 
 script:
   # Start the container from the image and perform tests.
-  - DOCKER_IMAGE="${distro}:${version}" ./bin/test_cicd.sh
+  - DOCKER_IMAGE="${distro}:${version}" ./cm.sh test
 
 notifications:
   # Notify Ansible Galaxy when a role builds successfully.
