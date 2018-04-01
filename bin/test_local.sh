@@ -15,6 +15,7 @@ ROOTDIR="${CURDIR%/*}"
 #
 # program
 #
+sudo ./cm.sh deploy
 DOCKER_IMAGE=python:2 ${ROOTDIR}/cm.sh test
 DOCKER_IMAGE=ubuntu:16.04 ${ROOTDIR}/cm.sh test
 DOCKER_IMAGE=debian:latest ${ROOTDIR}/cm.sh test
