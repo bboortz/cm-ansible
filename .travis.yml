@@ -6,10 +6,10 @@ sudo: required
 env:
   - distro: python
     version: 2
-#  - distro: ubuntu
-#    version: 16.04
-#  - distro: base/archlinux
-#    version: latest
+  - distro: ubuntu
+    version: 16.04
+  - distro: base/archlinux
+    version: latest
 
 # Tell Travis to start Docker when it brings up an environment.
 services:

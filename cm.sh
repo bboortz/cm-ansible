@@ -13,6 +13,7 @@ ANSIBLEDIR="${CURDIR}/ansible"
 VERBOSE=""
 PYTHON_VERSION="$( python --version 2>&1 )"
 source /etc/*release
+OS=$( awk -F= '/^ID=/ {print $2}' /etc/*release )
 
 
 
@@ -27,7 +28,7 @@ f_start() {
         echo "# PPROGRAM: $0"
         echo "# PARAMETER: $params"
 	echo "###########################################"
-	echo "# LINUX DISTRO: $PRETTY_NAME"
+	echo "# LINUX DISTRO: $OS"
 	echo "# PYTHON VERSION: $PYTHON_VERSION"
 	echo "###########################################"
 	echo
