@@ -11,6 +11,8 @@ CURDIR="${0%/*}"
 VENVDIR="${CURDIR}/.venv"
 ANSIBLEDIR="${CURDIR}/ansible"
 VERBOSE=""
+PYTHON_VERSION="$( python --version 2>&1 )"
+source /etc/*release
 
 
 
@@ -24,6 +26,9 @@ f_start() {
 	echo "# PROGRAM START"
         echo "# PPROGRAM: $0"
         echo "# PARAMETER: $params"
+	echo "###########################################"
+	echo "# LINUX DISTRO: $PRETTY_NAME"
+	echo "# PYTHON VERSION: $PYTHON_VERSION"
 	echo "###########################################"
 	echo
 }

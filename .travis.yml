@@ -4,8 +4,12 @@ sudo: required
 
 # Provide a list of OSes we want to use for testing.
 env:
-  - distro: ubuntu
-    version: 16.04
+  - distro: python
+    version: 2
+#  - distro: ubuntu
+#    version: 16.04
+#  - distro: base/archlinux
+#    version: latest
 
 # Tell Travis to start Docker when it brings up an environment.
 services:
@@ -17,7 +21,7 @@ before_install:
 
 script:
   # Start the container from the image and perform tests.
-  - ./cm.sh
+  - DOCKER_IMAGE="${distro}:${version" ./test.sh
 
 notifications:
   # Notify Ansible Galaxy when a role builds successfully.
