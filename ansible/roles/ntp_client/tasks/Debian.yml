@@ -1,0 +1,8 @@
+---
+- name: Debian | run role
+  debug:
+    msg: "Debian"
+- name: Debian | Set ntp_service Variable
+  set_fact:
+    ntp_service: "ntp"
+

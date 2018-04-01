@@ -15,10 +15,12 @@
   meta: end_play
   when: whoami.stdout != "root"
 
-- name: Set ntp_service Variable
-  set_fact:
-    ntp_service: "ntpd"
+- import_tasks: Debian.yml
+  when: ansible_os_family == 'Debian'
+  tags: ["ntp"]
+- import_tasks: Archlinux.yml
   when: ansible_os_family == 'Archlinux'
+  tags: ["ntp"]
 
 - name: ntp | Configure ntp file
   template: src=ntp.conf.j2 dest=/etc/ntp.conf
