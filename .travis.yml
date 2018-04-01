@@ -8,6 +8,8 @@ env:
     version: 2
   - distro: ubuntu
     version: 16.04
+  - distro: debian
+    version: latest
   - distro: base/archlinux
     version: latest
 

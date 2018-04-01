@@ -31,6 +31,7 @@ f_error() {
 {
 	case $OS in
 		debian)
+		ubuntu)
 			f_info "known operating system detected: $OS"
 			which python > /dev/null 2>&1 && which virtualenv > /dev/null 2>&1 || (
 				apt-get update
