@@ -1,7 +1,0 @@
----
-- include: upgrade.yml
-- include: packages.yml
-- include: locale.yml
-- include: keyboard.yml
-- include: timezone.yml
-- include: ntp.yml

@@ -5,5 +5,5 @@
 - name: Debian | Update packages list
   apt: update_cache=yes cache_valid_time=3600
 - name: Debian | Upgrade packages
-  apt: upgrade=safe cache_valid_time=86400
+  apt: upgrade=yes cache_valid_time=86400
 
