@@ -4,16 +4,27 @@ set -e
 set -u
 export PS1='$ '
 
+
+
 #
 # global variables
 #
-CURDIR="${0%/*}"
-VENVDIR="${CURDIR}/.venv"
-ANSIBLEDIR="${CURDIR}/ansible"
-VERBOSE=""
-PYTHON_VERSION="$( python --version 2>&1 )"
+
+# directories
+CURDIR="$( readlink -f ${0%/*} )"
+ROOTDIR="${CURDIR%/*}"
+VENVDIR="${ROOTDIR}/.venv"
+ANSIBLEDIR="${ROOTDIR}/ansible"
+
+# ansible
+ANSIBLE_INVENTORY="${ANSIBLEDIR}/hosts"
+
+# additional
 source /etc/*release
 OS=$( awk -F= '/^ID=/ {print $2}' /etc/*release )
+VERBOSE=""
+PYTHON_VERSION="$( python --version 2>&1 )"
+ANSIBLE_VERSION="$( ansible --version 2>&1 | head -n 1 )"
 
 
 
@@ -30,6 +41,7 @@ f_start() {
 	echo "###########################################"
 	echo "# LINUX DISTRO: $OS"
 	echo "# PYTHON VERSION: $PYTHON_VERSION"
+	echo "# ANSIBLE VERSION: $ANSIBLE_VERSION"
 	echo "###########################################"
 	echo
 }
@@ -60,7 +72,7 @@ f_activate_venv() {
 
 f_install_requirements() {
 	f_info "install packages into ${VENVDIR} ..."
-	pip install --upgrade -r "${CURDIR}/requirements.txt"
+	pip install --upgrade -r "${ROOTDIR}/requirements.txt"
 }
 
 f_bootstrap() {
