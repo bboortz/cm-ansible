@@ -47,15 +47,33 @@ f_error() {
 	echo "# ERROR: $@" >&2
 }
 
+f_activate_venv() {
+	f_info "using virtualenv ${VENVDIR} ..."
+	source ${VENVDIR}/bin/activate
+}
+
+f_install_requirements() {
+	f_info "install packages into ${VENVDIR} ..."
+	pip install --upgrade -r "${CURDIR}/requirements.txt"
+}
+
 f_bootstrap() {
 	if [ -d "${VENVDIR}" ]; then
-		return 
-	fi
+		f_info "using virtualenv ${VENVDIR} ..."
+		source ${VENVDIR}/bin/activate
+		return
 
-	f_info "bootstrapping virtualbox in $VENVDIR ..."
-	virtualenv "${VENVDIR}"
-	source ${VENVDIR}/bin/activate
-	pip install --upgrade -r "${CURDIR}/requirements.txt"
+	elif [ -n "${VIRTUAL_ENV:-}" ]; then
+		VENVDIR="${VIRTUAL_ENV}"
+		f_activate_venv
+		f_install_requirements
+	
+	else
+		f_info "creating virtualenv in $VENVDIR ..."
+		virtualenv "${VENVDIR}"
+		f_activate_venv
+		f_install_requirements
+	fi
 }
 
 f_playbook() {

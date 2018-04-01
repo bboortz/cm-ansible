@@ -1,2 +1,13 @@
+#language: python
+#script: ./cm.sh
 language: python
-script: cm.sh
+python:
+  - '2.7'
+  - '3.5'
+#- pypy
+install:
+  - pip install --upgrade -r requirements.txt
+script: 
+  - make test
+  - ./cm.sh
+
