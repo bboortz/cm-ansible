@@ -17,7 +17,7 @@ VENVDIR="${ROOTDIR}/.venv"
 ANSIBLEDIR="${ROOTDIR}/ansible"
 
 # ansible
-ANSIBLE_INVENTORY="${ANSIBLEDIR}/hosts"
+export ANSIBLE_INVENTORY="${ANSIBLEDIR}/hosts"
 
 # additional
 source /etc/*release
@@ -62,7 +62,15 @@ f_info() {
 }
 
 f_error() {
+	echo
 	echo "# ERROR: $@" >&2
+}
+
+f_usage() {
+	echo
+	echo "usage: $0 <playbook>"
+	echo "example: $0 deploy"
+	exit 1
 }
 
 f_activate_venv() {
@@ -95,9 +103,14 @@ f_bootstrap() {
 }
 
 f_playbook() {
-	local playbook="${ANSIBLEDIR}/playbook.yml"
+	local playbook="${ANSIBLEDIR}/${1}.yml"
+
+	if [ ! -f "${playbook}" ]; then
+		f_error "playbook not found: $playbook"
+		exit 1
+	fi
 	f_info "running playbook $playbook ..."
-	ansible-playbook -i "${ANSIBLEDIR}/hosts" -c local "${playbook}" $VERBOSE
+	ansible-playbook ${VERBOSE} -c local "${playbook}" $VERBOSE
 }
 
 
@@ -105,15 +118,26 @@ f_playbook() {
 # program
 #
 {
+	# starting up
 	trap f_exit EXIT
 	f_start "$@"
+
+	# checking the parameter
+	if [ -z "${1:-}" ]; then
+		f_error "no parameter passed to program."
+		f_usage
+	fi
+
+	# bootstrapping the local environment
 	f_bootstrap
 
+	# setting verbose mode if needed
 	if [ -n "${CM_DEBUG:-}" ]; then
 		f_info "debug mode on"
 		VERBOSE="-vvvv"
 	fi
 
-	f_playbook
+	# running the playbook
+	f_playbook ${1}
 }
 
