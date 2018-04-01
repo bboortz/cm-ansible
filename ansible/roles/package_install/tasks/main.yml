@@ -1,0 +1,23 @@
+---
+# tasks file for os---
+#
+- name: Role - package_install
+  debug:
+    msg: "package_install"
+    verbosity: 1
+- name: show parameter package_list
+  debug:
+    msg: "{{ package_list }}"
+- name: gather userid
+  shell: whoami
+  register: whoami
+- name: check - is user root?
+  meta: end_play
+  when: whoami.stdout != "root"
+
+- import_tasks: Debian.yml
+  when: ansible_os_family == 'Debian'
+  tags: ["packages","common"]
+- import_tasks: Archlinux.yml
+  when: ansible_os_family == 'Archlinux'
+  tags: ["packages","common"]

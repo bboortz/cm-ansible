@@ -1,7 +1,32 @@
 ---
-user: "{{ ansible_ssh_user }}"
-user_home: /home/{{ user }}
-dotfiles: "{{ user_home }}/files/dotfiles"
+# packages to install
+package_install:
+  package_list:
+    - bash-completion
+    - bzip2
+    - curl
+    - fail2ban
+    - git
+    - gzip
+    - htop
+    - lsof
+    - ntp
+    - rsync
+    - screen
+    - strace
+    - tar
+    - tree
+    - unzip
+    - vim
+    - wget
+    - zip 
 
-ntp_server: ntp1.ptb.de
+# ntp settings
+ntp_client:
+  ntp_server: ntp1.ptb.de
 
+# user settings
+user:
+  user_name: "{{ ansible_ssh_user }}"
+  user_home: /home/{{ user }}
+  dotfiles: "{{ user_home }}/files/dotfiles"

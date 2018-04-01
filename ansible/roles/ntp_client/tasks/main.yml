@@ -1,0 +1,24 @@
+---
+# tasks file for os---
+#
+- name: Role - package_install
+  debug:
+    msg: "package_install"
+    verbosity: 1
+- name: show parameter package_list
+  debug:
+    msg: "{{ ntp_server }}"
+- name: gather userid
+  shell: whoami
+  register: whoami
+- name: check - is user root?
+  meta: end_play
+  when: whoami.stdout != "root"
+
+- name: ntp | Configure ntp file
+  template: src=ntp.conf.j2 dest=/etc/ntp.conf
+  tags: ntp
+  notify: Restart ntp
+- name: ntp | Start the ntp service
+  service: name=ntpd state=started enabled=true
+  tags: ntp

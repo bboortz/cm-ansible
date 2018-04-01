@@ -1,0 +1,9 @@
+---
+- name: Debian | run role
+  debug:
+    msg: "Debian"
+- name: Debian | Install list of packages
+  apt: name={{item}} state=latest
+  with_items: "{{ package_list }}"
+
+

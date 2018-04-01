@@ -1,20 +1,24 @@
 ---
 - hosts: local
   connection: local
-  remote_user: root
-  become_method: sudo
+  become: yes
 
   vars_files:
     - variables.yml
 
   roles:
-    - common       # List of essential packages
-    - home         # prepare and configure home directory
-    - docker       # install and configure docker
-    - user         # create user
+    - os_upgrade    # up-to-date operating system
+    - role: package_install
+      package_list: "{{ package_install.package_list }}"
+    - role: ntp_client
+      ntp_server: ${{ ntp_client.ntp_server }}"
+#    - common       # List of essential packages
+#    - home         # prepare and configure home directory
+#    - docker       # install and configure docker
+#    - user         # create user
 #    - c            # c and tools
-    - python       # python and tools
-    - golang       # golang and tools
+#    - python       # python and tools
+#    - golang       # golang and tools
 
 # https://github.com/briangershon/linux-desktop-ansible
 #- include: ../../linux-desktop-private/playbook.yml
