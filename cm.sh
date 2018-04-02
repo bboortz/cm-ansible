@@ -23,6 +23,7 @@ export ANSIBLE_ROLES_PATH="${ANSIBLEDIR}/roles"
 # additional
 source /etc/*release
 VERBOSE=""
+CHECK=""
 OS=$( awk -F= '/^ID=/ {print $2}' /etc/*release )
 PYTHON_VERSION="$( python --version 2>&1 )"
 ANSIBLE_VERSION="$( ansible --version 2>&1 | head -n 1 )"
@@ -117,7 +118,7 @@ f_playbook() {
 		exit 1
 	fi
 	f_info "running playbook $playbook ..."
-	ansible-playbook ${VERBOSE} -c local "${playbook}" $VERBOSE 
+	ansible-playbook ${VERBOSE} ${CHECK} -c local "${playbook}"
 }
 
 
@@ -129,6 +130,12 @@ f_playbook() {
 	if [ -n "${CM_DEBUG:-}" ]; then
 		f_info "debug mode on"
 		VERBOSE="-vvvv"
+	fi
+
+	# setting dry-run mode if needed
+	if [ -n "${CM_DRYRUN:-}" ]; then
+		f_info "debug mode on"
+		CHECK="--check"
 	fi
 
 	# starting up
