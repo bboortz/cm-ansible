@@ -2,12 +2,16 @@
 - name: unittest | run role
   debug:
     msg: "unittest"
+  tags: [ "unittest" ]
 - name: unittest | gather playbooks
   set_fact: 
     files: "{{ lookup('fileglob','{{ playbook_dir }}/*.yml',wantlist=true) | reject('search','variables.yml') | list }}"
+  tags: [ "unittest" ]
 - name: unittest | show playbooks
   debug:
     msg: "{{ files }}"
+  tags: [ "unittest" ]
 - name: unittest | syntax check for playbooks
   shell: ansible-playbook -i {{ inventory_file }} {{ item }} --syntax-check
   with_items: "{{ files }}"
+  tags: [ "unittest" ]
