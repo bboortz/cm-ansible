@@ -1,5 +1,5 @@
 pip
-ansible==2.4
+ansible
 ansible-vault
 ansible-lint
 jmespath
