@@ -18,7 +18,6 @@ ANSIBLEDIR="${ROOTDIR}/ansible"
 
 # ansible
 export ANSIBLE_INVENTORY="${ANSIBLEDIR}/hosts"
-export LOCAL_ANSIBLE_PYTHON_INTERPRETER=$( which python 2>&1 )
 
 # additional
 source /etc/*release
@@ -82,7 +81,6 @@ f_usage() {
 f_activate_venv() {
 	f_info "using virtualenv ${VENVDIR} ..."
 	source ${VENVDIR}/bin/activate
-	export LOCAL_ANSIBLE_PYTHON_INTERPRETER="${VENVDIR}/bin/python"
 }
 
 f_install_requirements() {
