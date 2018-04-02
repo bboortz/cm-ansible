@@ -5,13 +5,28 @@
   tags: [ "unittest" ]
 - name: unittest | gather playbooks
   set_fact: 
-    files: "{{ lookup('fileglob','{{ playbook_dir }}/*.yml',wantlist=true) | reject('search','variables.yml') | list }}"
+    playbooks: "{{ lookup('fileglob','{{ playbook_dir }}/*.yml',wantlist=true) | reject('search','variables.yml') | list }}"
   tags: [ "unittest" ]
 - name: unittest | show playbooks
   debug:
-    msg: "{{ files }}"
+    msg: "{{ playbooks }}"
   tags: [ "unittest" ]
 - name: unittest | syntax check for playbooks
   shell: ansible-playbook -i {{ inventory_file }} {{ item }} --syntax-check
-  with_items: "{{ files }}"
+  with_items: "{{ playbooks }}"
+  tags: [ "unittest" ]
+- name: unittest | gather roles
+  find:
+    paths: "{{ playbook_dir }}/roles"
+    file_type: directory
+  register: roles
+  tags: [ "unittest" ]
+- name: unittest | show roles
+  debug:
+    msg: "{{ roles }}"
+  tags: [ "unittest" ]
+- name: unittest | show roles
+  debug:
+#    msg: "{{ roles.files }}"
+    msg: "{{ roles | json_query('files.path') }}"
   tags: [ "unittest" ]

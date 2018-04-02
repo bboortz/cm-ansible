@@ -71,7 +71,7 @@ f_info() {
 }
 
 f_debug() {
-	if [ -n "${CM_DEBUG}" ]; then
+	if [ -n "${CM_DEBUG:-}" ]; then
 		echo
 		echo "# DEBUG: $@"
 	fi
