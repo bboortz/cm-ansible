@@ -25,7 +25,7 @@ f_error() {
 
 f_install_packages_deb() {
 	apt-get update
-	DEBIAN_FRONTEND=noninteractive apt-get install -y aptitude python python-virtualenv docker
+	DEBIAN_FRONTEND=noninteractive apt-get install -y aptitude python python-virtualenv python-apt docker
 }
 
 f_install_packages_arch() {
