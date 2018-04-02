@@ -50,7 +50,8 @@ f_start() {
 		echo "# DOCKER API VERSION: $DOCKER_API_VERSION"
 		echo "###########################################"
 	fi
-	export | egrep "CM_" && echo "###########################################"
+	[ -n "${CM_DEBUG:-}" ] && export | egrep "CM_" && echo "###########################################"
+	[ -n "${CM_DEBUG:-}" ] && export | egrep "ANSIBLE_" && echo "###########################################"
 	echo
 }
 
@@ -67,6 +68,13 @@ f_exit() {
 f_info() {
 	echo
 	echo "# INFO: $@"
+}
+
+f_debug() {
+	if [ -n "${CM_DEBUG}" ]; then
+		echo
+		echo "# DEBUG: $@"
+	fi
 }
 
 f_error() {
@@ -118,7 +126,9 @@ f_playbook() {
 		exit 1
 	fi
 	f_info "running playbook $playbook ..."
-	ansible-playbook ${VERBOSE} ${CHECK} -c local "${playbook}"
+	cmd="ansible-playbook ${VERBOSE} ${CHECK} -c local ${playbook}"
+	f_debug "using cmd: $cmd"
+	$cmd
 }
 
 
