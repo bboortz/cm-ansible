@@ -1,0 +1,10 @@
+---
+# tasks file for os---
+#
+- name: Role - test
+  debug:
+    msg: "test"
+    verbosity: 1
+
+#- import_tasks: unittest.yml
+- import_tasks: smoketest.yml

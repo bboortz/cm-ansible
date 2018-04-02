@@ -1,4 +1,5 @@
 ---
+language: c
 # We need sudo for some of the Docker commands.
 sudo: required
 
@@ -19,11 +20,12 @@ services:
 
 before_install:
   # Pull the image from Docker Hub for the OS under test.
+  - sudo ./bin/install_dependencies.sh
   - docker pull ${distro}:${version}
 
 script:
   # Start the container from the image and perform tests.
-  - DOCKER_IMAGE="${distro}:${version}" ./test.sh
+  - DOCKER_IMAGE="${distro}:${version}" ./bin/test_travis.sh
 
 notifications:
   # Notify Ansible Galaxy when a role builds successfully.

@@ -26,7 +26,7 @@ ntp_client:
   ntp_server: ntp1.ptb.de
 
 # user settings
-user:
-  user_name: "{{ ansible_ssh_user }}"
-  user_home: /home/{{ user }}
-  dotfiles: "{{ user_home }}/files/dotfiles"
+#user:
+#  user_name: "{{ ansible_ssh_user }}"
+#  user_home: /home/{{ user }}
+#  dotfiles: "{{ user_home }}/files/dotfiles"

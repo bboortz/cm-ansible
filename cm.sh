@@ -4,17 +4,29 @@ set -e
 set -u
 export PS1='$ '
 
+
+
 #
 # global variables
 #
-CURDIR="${0%/*}"
-VENVDIR="${CURDIR}/.venv"
-ANSIBLEDIR="${CURDIR}/ansible"
-VERBOSE=""
-PYTHON_VERSION="$( python --version 2>&1 )"
-source /etc/*release
-OS=$( awk -F= '/^ID=/ {print $2}' /etc/*release )
 
+# directories
+CURDIR="$( readlink -f ${0%/*} )"
+ROOTDIR="${CURDIR}"
+VENVDIR="${ROOTDIR}/.venv"
+ANSIBLEDIR="${ROOTDIR}/ansible"
+
+# ansible
+export ANSIBLE_INVENTORY="${ANSIBLEDIR}/hosts"
+
+# additional
+source /etc/*release
+VERBOSE=""
+OS=$( awk -F= '/^ID=/ {print $2}' /etc/*release )
+PYTHON_VERSION="$( python --version 2>&1 )"
+ANSIBLE_VERSION="$( ansible --version 2>&1 | head -n 1 )"
+DOCKER_VERSION="$( docker version 2>&1 | awk '/^ Version:/ {print $2}' )"
+DOCKER_API_VERSION="$( docker version 2>&1 | awk '/^ API version:/ {print $3}' )"
 
 
 # 
@@ -28,9 +40,15 @@ f_start() {
         echo "# PPROGRAM: $0"
         echo "# PARAMETER: $params"
 	echo "###########################################"
-	echo "# LINUX DISTRO: $OS"
-	echo "# PYTHON VERSION: $PYTHON_VERSION"
-	echo "###########################################"
+	if [ -n "${VERBOSE}" ]; then
+		echo "# LINUX DISTRO: $OS"
+		echo "# PYTHON VERSION: $PYTHON_VERSION"
+		echo "# ANSIBLE VERSION: $ANSIBLE_VERSION"
+		echo "# DOCKER VERSION: $DOCKER_VERSION"
+		echo "# DOCKER API VERSION: $DOCKER_API_VERSION"
+		echo "###########################################"
+	fi
+	export | egrep "CM_" && echo "###########################################"
 	echo
 }
 
@@ -50,7 +68,15 @@ f_info() {
 }
 
 f_error() {
+	echo
 	echo "# ERROR: $@" >&2
+}
+
+f_usage() {
+	echo
+	echo "usage: $0 <playbook>"
+	echo "example: $0 deploy"
+	exit 1
 }
 
 f_activate_venv() {
@@ -60,13 +86,12 @@ f_activate_venv() {
 
 f_install_requirements() {
 	f_info "install packages into ${VENVDIR} ..."
-	pip install --upgrade -r "${CURDIR}/requirements.txt"
+	pip install --upgrade -r "${ROOTDIR}/requirements.txt"
 }
 
 f_bootstrap() {
 	if [ -d "${VENVDIR}" ]; then
-		f_info "using virtualenv ${VENVDIR} ..."
-		source ${VENVDIR}/bin/activate
+		f_activate_venv
 		return
 
 	elif [ -n "${VIRTUAL_ENV:-}" ]; then
@@ -79,13 +104,19 @@ f_bootstrap() {
 		virtualenv "${VENVDIR}"
 		f_activate_venv
 		f_install_requirements
+
 	fi
 }
 
 f_playbook() {
-	local playbook="${ANSIBLEDIR}/playbook.yml"
+	local playbook="${ANSIBLEDIR}/${1}.yml"
+
+	if [ ! -f "${playbook}" ]; then
+		f_error "playbook not found: $playbook"
+		exit 1
+	fi
 	f_info "running playbook $playbook ..."
-	ansible-playbook -i "${ANSIBLEDIR}/hosts" -c local "${playbook}" $VERBOSE
+	ansible-playbook ${VERBOSE} -c local "${playbook}" $VERBOSE
 }
 
 
@@ -93,15 +124,26 @@ f_playbook() {
 # program
 #
 {
-	trap f_exit EXIT
-	f_start "$@"
-	f_bootstrap
-
+	# setting verbose mode if needed
 	if [ -n "${CM_DEBUG:-}" ]; then
 		f_info "debug mode on"
 		VERBOSE="-vvvv"
 	fi
 
-	f_playbook
+	# starting up
+	trap f_exit EXIT
+	f_start "$@"
+
+	# checking the parameter
+	if [ -z "${1:-}" ]; then
+		f_error "no parameter passed to program."
+		f_usage
+	fi
+
+	# bootstrapping the local environment
+	f_bootstrap
+
+	# running the playbook
+	f_playbook ${1}
 }
 
