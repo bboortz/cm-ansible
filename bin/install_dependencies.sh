@@ -25,7 +25,7 @@ f_error() {
 
 f_install_packages_deb() {
 	apt-get update
-	DEBIAN_FRONTEND=noninteractive apt-get install -y python python-virtualenv docker
+	DEBIAN_FRONTEND=noninteractive apt-get install -y aptitude python python-virtualenv docker
 }
 
 f_install_packages_arch() {
@@ -41,11 +41,11 @@ f_install_packages_arch() {
 	case $OS in
 		debian)
 			f_info "known operating system detected: $OS"
-			which python > /dev/null 2>&1 && which virtualenv > /dev/null 2>&1 || f_install_packages_deb
+			f_install_packages_deb
 			;;
 		ubuntu)
 			f_info "known operating system detected: $OS"
-			which python > /dev/null 2>&1 && which virtualenv > /dev/null 2>&1 || f_install_packages_deb
+			f_install_packages_deb
 			;;
 		arch)
 			f_info "known operating system detected: $OS"
