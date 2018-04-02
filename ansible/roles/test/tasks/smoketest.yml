@@ -29,9 +29,9 @@
     - "{{ base_dir }}/cm.sh:/code/cm.sh"
     - "{{ base_dir }}/requirements.txt:/code/requirements.txt"
   register: dockerout
-- name: smoketest | print output 
-  debug: 
-    msg: "{{ dockerout }}"
+#- name: smoketest | print output 
+#  debug: 
+#    msg: "{{ dockerout }}"
 - name: smoketest | stop container with test 
   docker_container:
     name: cm.sh-test
