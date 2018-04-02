@@ -3,7 +3,7 @@
   become: yes
 
   vars_files:
-    - variables.yml
+    - "{{ playbook_dir }}/variables.yml"
 
   roles:
     - os_upgrade    # up-to-date operating system

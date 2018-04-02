@@ -1,0 +1,33 @@
+---
+- name: unittest | run role
+  debug:
+    msg: "unittest"
+  tags: [ "unittest" ]
+- name: unittest | gather playbooks
+  set_fact: 
+    playbooks: "{{ lookup('fileglob','{{ playbook_dir }}/*.yml',wantlist=true) | reject('search','variables.yml') | list }}"
+  tags: [ "unittest" ]
+- name: unittest | show playbooks
+  debug:
+    msg: "{{ playbooks }}"
+  tags: [ "unittest" ]
+- name: unittest | syntax check for playbooks
+  shell: ansible-playbook -i {{ inventory_file }} {{ item }} --syntax-check
+  with_items: "{{ playbooks }}"
+  tags: [ "unittest" ]
+
+- name: unittest | gather roles
+  find:
+    paths: "{{ playbook_dir }}/roles"
+    file_type: directory
+  register: roles_list
+  tags: [ "unittest" ]
+- name: unittest | show roles
+  debug:
+    msg: "{{ roles_list | json_query('files[*].path') }}"
+  tags: [ "unittest" ]
+- name: unittest | test if test.yml is available
+  shell: if [ ! -f "{{ item }}/tests/test.yml" ]; then echo "test not found for role " {{ item }}; exit 1; fi
+  with_items: "{{ roles_list | json_query('files[*].path') }}"
+  tags: [ "unittest" ]
+

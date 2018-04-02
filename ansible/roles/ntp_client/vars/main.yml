@@ -1,2 +1,4 @@
 ---
-# vars file for os
+# vars file for ntp_client
+ntp_client:
+  ntp_server: ntp1.ptb.de
