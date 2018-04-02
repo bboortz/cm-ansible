@@ -26,8 +26,8 @@ OS=$( awk -F= '/^ID=/ {print $2}' /etc/*release )
 VERBOSE=""
 PYTHON_VERSION="$( python --version 2>&1 )"
 ANSIBLE_VERSION="$( ansible --version 2>&1 | head -n 1 )"
-DOCKER_VERSION="$( docker version | awk '/^ Version:/ {print $2}' )"
-DOCKER_API_VERSION="$( docker version | awk '/^ API version:/ {print $3}' )"
+DOCKER_VERSION="$( docker version | awk '/^ Version:/ {print $2}' 2>&1 )"
+DOCKER_API_VERSION="$( docker version | awk '/^ API version:/ {print $3}' 2>&1 )"
 
 
 
