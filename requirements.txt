@@ -2,5 +2,3 @@ pip
 ansible==2.4
 ansible-vault
 ansible-lint
-docker
-docker-py
