@@ -26,6 +26,7 @@ OS=$( awk -F= '/^ID=/ {print $2}' /etc/*release )
 VERBOSE=""
 PYTHON_VERSION="$( python --version 2>&1 )"
 ANSIBLE_VERSION="$( ansible --version 2>&1 | head -n 1 )"
+DOCKER_VERSION="$( docker --version 2>&1 | head -n 1 )"
 
 
 
@@ -43,6 +44,7 @@ f_start() {
 	echo "# LINUX DISTRO: $OS"
 	echo "# PYTHON VERSION: $PYTHON_VERSION"
 	echo "# ANSIBLE VERSION: $ANSIBLE_VERSION"
+	echo "# DOCKER VERSION: $DOCKER_VERSION"
 	echo "###########################################"
 	export | egrep "CM_" && echo "###########################################"
 	echo
