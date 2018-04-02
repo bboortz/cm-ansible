@@ -1,9 +1,0 @@
----
-- name: dotfiles | clone git repository
-  git:
-    repo: https://github.com/bboortz/dotfiles.git
-    dest: "{{ dotfiles }}"
-
-- name: dotfiles | install dotfiles
-  shell: "{{ dotfiles }}/files/bin/dfm install"
-

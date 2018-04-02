@@ -1,4 +1,8 @@
 ---
+#
+# role "package_install" settings
+#
+
 # packages to install
 package_install:
   package_list:
@@ -21,9 +25,22 @@ package_install:
     - wget
     - zip 
 
-# ntp settings
+
+
+#
+# role "ntp_client" settings
+#
 ntp_client:
   ntp_server: ntp1.ptb.de
+
+
+
+#
+# role "test" settings
+test:
+  base_dir: "{{ playbook_dir }}/.."
+
+  
 
 # user settings
 #user:

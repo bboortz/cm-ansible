@@ -5,15 +5,15 @@
   debug:
     msg: "package_install"
     verbosity: 1
-- name: show parameter package_list
+- name: show parameter ntp_server
   debug:
     msg: "{{ ntp_server }}"
 - name: gather userid
   shell: whoami
   register: whoami
-- name: check - is user root?
-  meta: end_play
-  when: whoami.stdout != "root"
+#- name: check - is user root?
+#  meta: end_play
+#  when: whoami.stdout != "root"
 
 - import_tasks: Debian.yml
   when: ansible_os_family == 'Debian'
