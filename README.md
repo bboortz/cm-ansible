@@ -25,7 +25,7 @@ To install the software please use the following steps:
 ```bash
 git clone https://github.com/bboortz/cm-ansible.git
 cd cm-ansible
-./scripts/install_dependencies.sh
+sudo ./bin/install_dependencies.sh
 ```
 
 
@@ -52,5 +52,10 @@ cd cm-ansible
 ```bash
 ./bin/test_local.sh
 ```
+
+* testing with travis
+using file .travis and script
+```bash
+./bin/test_travis.sh
 ```
 

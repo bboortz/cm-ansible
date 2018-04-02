@@ -20,7 +20,7 @@ services:
 
 before_install:
   # Pull the image from Docker Hub for the OS under test.
-  - ./bin/install_dependencies.sh
+  - sudo ./bin/install_dependencies.sh
   - docker pull ${distro}:${version}
 
 script:
