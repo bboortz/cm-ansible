@@ -1,5 +1,5 @@
 ---
-language: python
+language: c
 # We need sudo for some of the Docker commands.
 sudo: required
 
