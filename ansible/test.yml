@@ -5,4 +5,5 @@
     - "{{ playbook_dir }}/variables.yml"
 
   roles:
-    - test
+  - role: test
+    base_dir: "{{ test.base_dir }}"
