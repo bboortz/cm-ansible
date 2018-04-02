@@ -21,13 +21,12 @@ export ANSIBLE_INVENTORY="${ANSIBLEDIR}/hosts"
 
 # additional
 source /etc/*release
-OS=$( awk -F= '/^ID=/ {print $2}' /etc/*release )
 VERBOSE=""
+OS=$( awk -F= '/^ID=/ {print $2}' /etc/*release )
 PYTHON_VERSION="$( python --version 2>&1 )"
 ANSIBLE_VERSION="$( ansible --version 2>&1 | head -n 1 )"
-DOCKER_VERSION="$( docker version | awk '/^ Version:/ {print $2}' 2>&1 )"
-DOCKER_API_VERSION="$( docker version | awk '/^ API version:/ {print $3}' 2>&1 )"
-
+DOCKER_VERSION="$( docker version 2>&1 | awk '/^ Version:/ {print $2}' )"
+DOCKER_API_VERSION="$( docker version 2>&1 | awk '/^ API version:/ {print $3}' )"
 
 
 # 
@@ -41,12 +40,14 @@ f_start() {
         echo "# PPROGRAM: $0"
         echo "# PARAMETER: $params"
 	echo "###########################################"
-	echo "# LINUX DISTRO: $OS"
-	echo "# PYTHON VERSION: $PYTHON_VERSION"
-	echo "# ANSIBLE VERSION: $ANSIBLE_VERSION"
-	echo "# DOCKER VERSION: $DOCKER_VERSION"
-	echo "# DOCKER API VERSION: $DOCKER_API_VERSION"
-	echo "###########################################"
+	if [ -n "${VERBOSE}" ]; then
+		echo "# LINUX DISTRO: $OS"
+		echo "# PYTHON VERSION: $PYTHON_VERSION"
+		echo "# ANSIBLE VERSION: $ANSIBLE_VERSION"
+		echo "# DOCKER VERSION: $DOCKER_VERSION"
+		echo "# DOCKER API VERSION: $DOCKER_API_VERSION"
+		echo "###########################################"
+	fi
 	export | egrep "CM_" && echo "###########################################"
 	echo
 }
@@ -123,6 +124,12 @@ f_playbook() {
 # program
 #
 {
+	# setting verbose mode if needed
+	if [ -n "${CM_DEBUG:-}" ]; then
+		f_info "debug mode on"
+		VERBOSE="-vvvv"
+	fi
+
 	# starting up
 	trap f_exit EXIT
 	f_start "$@"
@@ -135,12 +142,6 @@ f_playbook() {
 
 	# bootstrapping the local environment
 	f_bootstrap
-
-	# setting verbose mode if needed
-	if [ -n "${CM_DEBUG:-}" ]; then
-		f_info "debug mode on"
-		VERBOSE="-vvvv"
-	fi
 
 	# running the playbook
 	f_playbook ${1}
