@@ -18,6 +18,7 @@ ANSIBLEDIR="${ROOTDIR}/ansible"
 
 # ansible
 export ANSIBLE_INVENTORY="${ANSIBLEDIR}/hosts"
+export LOCAL_ANSIBLE_PYTHON_INTERPRETER=$( which python 2>&1 )
 
 # additional
 source /etc/*release
@@ -43,6 +44,7 @@ f_start() {
 	echo "# PYTHON VERSION: $PYTHON_VERSION"
 	echo "# ANSIBLE VERSION: $ANSIBLE_VERSION"
 	echo "###########################################"
+	export | egrep "CM_" && echo "###########################################"
 	echo
 }
 
@@ -76,6 +78,7 @@ f_usage() {
 f_activate_venv() {
 	f_info "using virtualenv ${VENVDIR} ..."
 	source ${VENVDIR}/bin/activate
+	export LOCAL_ANSIBLE_PYTHON_INTERPRETER="${VENVDIR}/bin/python"
 }
 
 f_install_requirements() {
@@ -85,8 +88,7 @@ f_install_requirements() {
 
 f_bootstrap() {
 	if [ -d "${VENVDIR}" ]; then
-		f_info "using virtualenv ${VENVDIR} ..."
-		source ${VENVDIR}/bin/activate
+		f_activate_venv
 		return
 
 	elif [ -n "${VIRTUAL_ENV:-}" ]; then
@@ -99,6 +101,7 @@ f_bootstrap() {
 		virtualenv "${VENVDIR}"
 		f_activate_venv
 		f_install_requirements
+
 	fi
 }
 
