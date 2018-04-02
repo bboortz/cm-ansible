@@ -27,7 +27,7 @@ VERBOSE=""
 PYTHON_VERSION="$( python --version 2>&1 )"
 ANSIBLE_VERSION="$( ansible --version 2>&1 | head -n 1 )"
 DOCKER_VERSION="$( docker version | awk '/^ Version:/ {print $2}' )"
-DOCKER_API VERSION="$( docker version | awk '/^ API version:/ {print $2}' )"
+DOCKER_API_VERSION="$( docker version | awk '/^ API version:/ {print $3}' )"
 
 
 
