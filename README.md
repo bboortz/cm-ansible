@@ -13,7 +13,7 @@ I wrote it to manage my own local infrastucture at home.
 ### Tested for
 * Ubuntu 16.06
 * Arch Linux
-* Alpine (manually)
+* Alpine (only via local testing)
 
 
 ## Usage
