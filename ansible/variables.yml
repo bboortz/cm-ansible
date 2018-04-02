@@ -15,6 +15,9 @@ package_install:
     - htop
     - lsof
     - ntp
+    - python
+    - python-virtualenv
+    - rkhunter
     - rsync
     - screen
     - strace
