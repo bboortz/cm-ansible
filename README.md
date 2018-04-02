@@ -37,7 +37,7 @@ sudo ./bin/install_dependencies.sh
 ```
 * Running deploy playbook
 ```bash
-./cm.sh deploy
+sudo ./cm.sh deploy
 ```
 
 
@@ -50,7 +50,7 @@ sudo ./bin/install_dependencies.sh
 
 * local testing different cases
 ```bash
-./bin/test_local.sh
+sudo ./bin/test_local.sh
 ```
 
 * testing with travis
