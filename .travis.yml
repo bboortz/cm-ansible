@@ -1,5 +1,6 @@
 ---
-language: python
+language: c
+dist: xenial
 # We need sudo for some of the Docker commands.
 sudo: required
 
