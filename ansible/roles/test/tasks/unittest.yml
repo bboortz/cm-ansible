@@ -1,0 +1,19 @@
+---
+- name: unittest | run role
+  debug:
+    msg: "unittest"
+- name: unittest | gather playbooks
+  set_fact: 
+    files: "{{ lookup('fileglob','{{ playbook_dir }}/*.yml',wantlist=true) | reject('search','variables.yml') | list }}"
+- name: unittest | show playbooks
+  debug:
+    msg: "{{ files }}"
+- name: unittest | syntax check for playbooks
+  shell: ansible-playbook -i {{ inventory_file }} {{ item }} --syntax-check
+  with_items: "{{ files }}"
+- name: unittest | gather playbooks (no. 2)
+  set_fact: 
+    files: "{{ lookup('fileglob','{{ playbook_dir }}/*.yml',wantlist=true) | reject('search','variables.yml') | reject('search','test.yml') | list }}"
+- name: unittest | dry run for playbooks
+  shell: ansible-playbook -i {{ inventory_file }} {{ item }} --check
+  with_items: "{{ files }}"

@@ -6,5 +6,5 @@
     msg: "test"
     verbosity: 1
 
-#- import_tasks: unittest.yml
+- import_tasks: unittest.yml
 - import_tasks: smoketest.yml

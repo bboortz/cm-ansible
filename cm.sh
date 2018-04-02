@@ -18,6 +18,7 @@ ANSIBLEDIR="${ROOTDIR}/ansible"
 
 # ansible
 export ANSIBLE_INVENTORY="${ANSIBLEDIR}/hosts"
+export ANSIBLE_ROLES_PATH="${ANSIBLEDIR}/roles"
 
 # additional
 source /etc/*release
@@ -116,7 +117,7 @@ f_playbook() {
 		exit 1
 	fi
 	f_info "running playbook $playbook ..."
-	ansible-playbook ${VERBOSE} -c local "${playbook}" $VERBOSE
+	ansible-playbook ${VERBOSE} -c local "${playbook}" $VERBOSE 
 }
 
 
