@@ -3,3 +3,6 @@ ansible
 ansible-vault
 ansible-lint
 jmespath
+boto
+boto3
+botocore

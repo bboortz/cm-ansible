@@ -8,11 +8,14 @@ package_install:
   package_list:
     - bash-completion
     - bzip2
+    - ccrypt
     - curl
     - fail2ban
     - git
+    - gnupg
     - gzip
     - htop
+    - keepass
     - lsof
     - ntp
     - python
@@ -26,6 +29,7 @@ package_install:
     - unzip
     - vim
     - wget
+    - xdotool
     - zip 
 
 
@@ -40,10 +44,24 @@ ntp_client:
 
 #
 # role "test" settings
+#
 test:
   base_dir: "{{ playbook_dir }}/.."
 
-  
+
+
+#
+# role "backup" settings
+#
+backup:
+  backup_files:
+    - ~/.ssh
+    - ~/.vimrc
+    - ~/files
+    - ~/Documents
+    - ~/Pictures
+ 
+
 
 # user settings
 #user:

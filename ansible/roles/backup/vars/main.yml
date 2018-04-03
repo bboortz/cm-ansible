@@ -1,0 +1,4 @@
+---
+# vars file for backup
+backup_dir: ~/.backup/
+backup_enc_file: "{{ backup_dir }}/backup_encrypted.tar.bz2.gpg"

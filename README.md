@@ -62,9 +62,17 @@ using file .travis and script
 
 ### Special Environment Variables
 
+* CM_MASTER_KEY
 * CM_DEBUG
 * CM_DRYRUN
 * CM_DOCKER_IMAGE
+
+
+#### CM_MASTER_KEY
+* Running cm.sh using a master key for ansible vault
+```bash
+CM_MASTER_KEY=PATH_TO_KEYFILE ./cm.sh backup
+```
 
 #### CM_DEBUG
 * Running cm.sh with debug output
