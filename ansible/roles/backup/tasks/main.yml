@@ -7,7 +7,7 @@
     verbosity: 1
 - name: show parameter aws_s3_backup_encryption_passphrase
   debug:
-    msg: "{{ aws_s3_backup_encryption_passphase }}"
+    msg: "{{ aws_s3_backup_encryption_passphrase }}"
 - name: show parameter backup_files
   debug:
     msg: "{{ backup_files }}"

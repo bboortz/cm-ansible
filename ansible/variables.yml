@@ -1,5 +1,13 @@
 ---
 #
+# generic stuff
+#
+generic:
+  nothing: "by now"
+
+
+
+#
 # role "package_install" settings
 #
 
@@ -31,6 +39,7 @@ package_install:
     - wget
     - xdotool
     - zip 
+    - zsh
 
 
 

@@ -20,12 +20,13 @@ source "${ROOTDIR}/.venv/bin/activate"
 
 # test local deploy
 CM_DRYRUN=1 ./cm.sh deploy
-./cm.sh deploy
+sudo ./cm.sh deploy
+#sudo -E ./cm.sh backup
 
 # test all roles
 for role in ${ROOTDIR}/ansible/roles/*; do
 	echo "ROLE: $role"
-	ANSIBLE_INVENTORY="/home/benni/projects/cm-ansible/ansible/hosts" ANSIBLE_ROLES_PATH="/home/benni/projects/cm-ansible/ansible/roles" ansible-playbook -vvvvvvv  -c local ${role}/tests/test.yml
+	CM_DRYRUN=1 ANSIBLE_INVENTORY="/home/benni/projects/cm-ansible/ansible/hosts" ANSIBLE_ROLES_PATH="/home/benni/projects/cm-ansible/ansible/roles" ansible-playbook -vvvvvvv  -c local ${role}/tests/test.yml
 done
 
 # run test in different docker container

@@ -50,7 +50,7 @@ sudo ./cm.sh deploy
 
 * local testing different cases
 ```bash
-sudo ./bin/test_local.sh
+./bin/test_local.sh
 ```
 
 * testing with travis

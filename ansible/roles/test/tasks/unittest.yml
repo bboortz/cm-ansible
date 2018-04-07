@@ -31,3 +31,7 @@
   with_items: "{{ roles_list | json_query('files[*].path') }}"
   tags: [ "unittest" ]
 
+- name: check if we have uploaded any credentials
+  shell: "grep -r '$ANSIBLE_VAULT' {{ playbook_dir}}/ || exit 1"
+
+

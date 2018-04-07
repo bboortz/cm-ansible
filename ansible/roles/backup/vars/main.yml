@@ -2,3 +2,5 @@
 # vars file for backup
 backup_dir: ~/.backup/
 backup_enc_file: "{{ backup_dir }}/backup_encrypted.tar.bz2.gpg"
+aws_s3_backup_encryption_passphrase: "passphrase for smoketesting"
+backup_files: 
