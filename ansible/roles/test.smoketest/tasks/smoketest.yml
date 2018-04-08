@@ -26,8 +26,12 @@
       - "{{ base_dir }}/cm.sh:/code/cm.sh"
       - "{{ base_dir }}/requirements.txt:/code/requirements.txt"
   register: dockerout
+  tags:
+    - unittest
 - name: smoketest | stop container with test
   docker_container:
     name: cm.sh-test
     image: "{{ docker_image }}"
   state: absent
+  tags:
+    - unittest

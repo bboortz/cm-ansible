@@ -1,0 +1,6 @@
+---
+- hosts: localhost
+  remote_user: root
+  roles:
+  - role: test
+    base_dir: "{{ playbook_dir }}/../../../.."

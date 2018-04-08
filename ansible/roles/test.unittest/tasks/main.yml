@@ -1,0 +1,11 @@
+---
+# tasks file for test.unittest---
+#
+- name: Role - test
+  debug:
+    msg: "test"
+    verbosity: 1
+
+- import_tasks: unittest.yml
+  tags:
+    - unittest
