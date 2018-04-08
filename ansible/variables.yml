@@ -6,7 +6,6 @@ generic:
   nothing: "by now"
 
 
-
 #
 # role "package_install" settings
 #
@@ -37,13 +36,12 @@ package_install:
     - vim
     - wget
     - xdotool
-    - zip 
+    - zip
     - zsh
   package_list_archlinux:
     - keepass
   package_list_debian:
     - python-apt
-
 
 
 #
@@ -53,13 +51,11 @@ ntp_client:
   ntp_server: ntp1.ptb.de
 
 
-
 #
 # role "test" settings
 #
 test:
   base_dir: "{{ playbook_dir }}/.."
-
 
 
 #
@@ -69,14 +65,14 @@ backup:
   backup_files:
     - ~/.ssh
     - ~/.vimrc
+    - ~/.zshrc
     - ~/files
     - ~/Documents
     - ~/Pictures
- 
 
 
 # user settings
-#user:
-#  user_name: "{{ ansible_ssh_user }}"
-#  user_home: /home/{{ user }}
-#  dotfiles: "{{ user_home }}/files/dotfiles"
+# user:
+#   user_name: "{{ ansible_ssh_user }}"
+#   user_home: /home/{{ user }}
+#   dotfiles: "{{ user_home }}/files/dotfiles"

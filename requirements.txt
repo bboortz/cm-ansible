@@ -2,6 +2,7 @@ pip
 ansible
 ansible-vault
 ansible-lint
+yamllint
 jmespath
 boto
 boto3

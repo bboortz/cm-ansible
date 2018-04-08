@@ -3,16 +3,16 @@
   debug:
     msg: "Debian"
 - name: Debian | Update Cache (raw)
-  raw: /usr/bin/apt-get update --yes --quiet
-  check_mode: no
+  raw: "/usr/bin/apt-get update --yes --quiet"
+  check_mode: "no"
+  tags:
+    - skip_ansible_lint
 - name: Debian | Install base packages (raw)
-  raw: DEBIAN_FRONTEND=noninteractive /usr/bin/apt-get install --yes --quiet aptitude python python-apt 
-  check_mode: no
-#- name: Debian | Install pip packages (raw)
-#  raw: pip install -U python-apt
-#  check_mode: no
+  raw: "DEBIAN_FRONTEND=noninteractive /usr/bin/apt-get install --yes --quiet aptitude python python-apt"
+  check_mode: "no"
+  tags:
+    - skip_ansible_lint
 - name: Debian | Update packages list
   apt: update_cache=yes cache_valid_time=3600
 - name: Debian | Upgrade packages
   apt: upgrade=yes cache_valid_time=86400
-

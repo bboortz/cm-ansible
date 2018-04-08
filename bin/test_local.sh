@@ -63,7 +63,6 @@ f_test_roles() {
 
 	for role in ${ROOTDIR}/ansible/roles/*; do
 		f_test_role "${role}"
-		#CM_DRYRUN=1 ANSIBLE_INVENTORY="/home/benni/projects/cm-ansible/ansible/hosts" ANSIBLE_ROLES_PATH="/home/benni/projects/cm-ansible/ansible/roles" ansible-playbook -vvvvvvv  -c local ${role}/tests/test.yml
 	done
 }
 
@@ -74,15 +73,9 @@ f_test_roles() {
 #
 {
 	f_test_roles
-	f_test_routines
+	# f_test_routines
 }
 
-
-
-# run test in different docker container
-#CM_DOCKER_IMAGE=python:2 ${ROOTDIR}/cm.sh test
-#CM_DOCKER_IMAGE=ubuntu:16.04 ${ROOTDIR}/cm.sh test
-#CM_DOCKER_IMAGE=debian:latest ${ROOTDIR}/cm.sh test
 
 
 

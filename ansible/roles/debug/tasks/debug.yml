@@ -1,0 +1,9 @@
+---
+# tasks file for os---
+#
+- name: Role - debug - ansible_connection
+  debug:
+    var: ansible_connection
+- name: Role - debug - ansible_python_interpreter
+  debug:
+    var: ansible_python_interpreter

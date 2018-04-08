@@ -5,16 +5,8 @@
   debug:
     msg: "os_upgrade"
     verbosity: 1
-- name: gather userid
-  shell: whoami
-  register: whoami
-#- name: check - is user root?
-#  meta: end_play
-#  when: "{{ whoami.stdout }}" != "root"
 
 - import_tasks: Debian.yml
   when: ansible_os_family == 'Debian'
-  tags: ["packages","common"]
 - import_tasks: Archlinux.yml
   when: ansible_os_family == 'Archlinux'
-  tags: ["packages","common"]
