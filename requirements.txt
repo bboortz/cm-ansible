@@ -6,3 +6,5 @@ jmespath
 boto
 boto3
 botocore
+requests
+docker-py

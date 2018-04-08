@@ -22,7 +22,7 @@ export ANSIBLE_ROLES_PATH="${ANSIBLEDIR}/roles"
 
 # additional
 source /etc/*release
-VERBOSE=""
+VERBOSE="-vv"
 CHECK=""
 VAULT=""
 OS=$( awk -F= '/^ID=/ {print $2}' /etc/*release )

@@ -23,7 +23,6 @@ package_install:
     - gnupg
     - gzip
     - htop
-    - keepass
     - lsof
     - ntp
     - python
@@ -40,6 +39,10 @@ package_install:
     - xdotool
     - zip 
     - zsh
+  package_list_archlinux:
+    - keepass
+  package_list_debian:
+    - python-apt
 
 
 

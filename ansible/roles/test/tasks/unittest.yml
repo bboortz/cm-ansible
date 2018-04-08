@@ -32,6 +32,6 @@
   tags: [ "unittest" ]
 
 - name: check if we have uploaded any credentials
-  shell: "grep -r '$ANSIBLE_VAULT' {{ playbook_dir}}/ || exit 1"
+  shell: "grep -r '$ANSIBLE_VAULT' {{ playbook_dir}}/ | egrep -v unittest.yml ; if [ $? -eq 0 ]; then exit 1; fi"
 
 

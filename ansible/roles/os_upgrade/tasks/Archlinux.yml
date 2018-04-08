@@ -11,8 +11,16 @@
   meta: end_play
   when: stat_result.stat.exists == True
 
-- name: ArchLinux | full system upgrade 
+- name: ArchLinux | update cache
   pacman:
     update_cache: yes
+    force: yes
+
+- name: ArchLinux | upgrade system
+  pacman:
     upgrade: yes
+    force: yes
+    recurse: yes
+    state: latest
+
 
