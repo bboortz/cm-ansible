@@ -53,6 +53,11 @@ sudo ./cm.sh deploy
 ./cm.sh test
 ```
 
+* unit testing
+```bash
+./cm.sh test.unittest
+```
+
 * local testing different cases
 ```bash
 ./bin/test_local.sh
