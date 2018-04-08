@@ -8,12 +8,6 @@
 - name: show parameter ntp_server
   debug:
     msg: "{{ ntp_server }}"
-- name: gather userid
-  shell: whoami
-  register: whoami
-#- name: check - is user root?
-#  meta: end_play
-#  when: whoami.stdout != "root"
 
 - import_tasks: Debian.yml
   when: ansible_os_family == 'Debian'

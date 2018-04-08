@@ -21,6 +21,6 @@
     upgrade: yes
     force: yes
     recurse: yes
-    state: latest
+    state: present
 
 

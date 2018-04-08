@@ -12,7 +12,7 @@
   when: stat_result.stat.exists == True
 
 - name: ArchLinux | Install list of packages
-  pacman: name={{item}} state=latest
+  pacman: name={{item}} state=present
   with_items: "{{ package_list }}"
 
 
