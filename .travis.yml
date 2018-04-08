@@ -10,7 +10,7 @@ env:
   - distro: ubuntu
     version: 16.04
   - distro: ubuntu
-    version: 17.10
+    version: 17.10 
   - distro: ubuntu
     version: 18.04
   - distro: debian
