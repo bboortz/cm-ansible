@@ -3,10 +3,10 @@
   debug:
     msg: "Debian"
 - name: Debian | Update Cache (raw)
-  raw: /usr/bin/apt-get update
+  raw: /usr/bin/apt-get update --yes --quiet
   check_mode: no
 - name: Debian | Install base packages (raw)
-  raw: DEBIAN_FRONTEND=noninteractive /usr/bin/apt-get install aptitude python python-apt 
+  raw: DEBIAN_FRONTEND=noninteractive /usr/bin/apt-get install --yes --quiet aptitude python python-apt 
   check_mode: no
 #- name: Debian | Install pip packages (raw)
 #  raw: pip install -U python-apt
