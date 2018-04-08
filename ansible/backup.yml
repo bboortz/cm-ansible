@@ -1,12 +1,11 @@
 ---
-- hosts: local_system_python
+- hosts: local
   vars_files:
     - "{{ playbook_dir }}/variables.yml"
     - "~/files/secrets/aws_s3_backup.yml"
 
 
   roles:
-    - role: backup 
+    - role: backup
       aws_s3_backup_encryption_passphase: "{{ aws_s3_backup_encryption_passphrase }}"
       backup_files: "{{ backup.backup_files }}"
-

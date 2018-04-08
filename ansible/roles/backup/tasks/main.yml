@@ -13,12 +13,14 @@
     msg: "{{ backup_files }}"
 
 - name: Creates directory
-  file: 
-   path: "{{ backup_dir }}"
-   state: directory
+  file:
+    path: "{{ backup_dir }}"
+    state: directory
 - name: gather hostname
   shell: hostname -f
   register: hostname
+  tags:
+    - skip_ansible_lint
 
 - name: gather backup files
   find:
@@ -27,9 +29,11 @@
   register: backup_enc_files
 - name: tar and encrypt file by file
   shell: "src=$( readlink -f {{ item }} ); dst=${src//\\//_}.tar.bz2.ccrypt; tar -cj $src | ccencrypt -E CM_CCRYPT_KEY  >  {{ backup_dir }}/$dst"
-  environment: 
+  environment:
     CM_CCRYPT_KEY: "{{ aws_s3_backup_encryption_passphrase }}"
   with_items: "{{ backup_files }}"
+  tags:
+    - skip_ansible_lint
 - name: gather enc backup files
   find:
     paths: "{{ backup_dir }}"
@@ -47,6 +51,3 @@
     state: absent
     path: "{{ item }}"
   with_items: "{{ backup_enc_files | json_query('files[*].path') }}"
-
-
-

@@ -5,4 +5,3 @@
 - name: Debian | Set ntp_service Variable
   set_fact:
     ntp_service: "ntp"
-

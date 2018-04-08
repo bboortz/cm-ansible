@@ -1,7 +1,7 @@
 ---
 - name: smoketest | run role
   debug:
-    msg: "smoketest" 
+    msg: "smoketest"
 - name: smoketest | Set default docker_image variable
   set_fact:
     docker_image: "python:2"
@@ -11,30 +11,23 @@
 - name: smoketest | Set docker_image variable using CM_DOCKER_IMAGE environment variable
   set_fact:
     docker_image: "{{ docker_image_env }}"
-    #when: docker_image_env is defined and docker_image_env != ""
   when: docker_image_env != ""
-- name: smoketest | env
-  shell: export
 - name: smoketest | run container with test
   docker_container:
     name: cm.sh-test
     image: "{{ docker_image }}"
     state: started
     entrypoint: /code/bin/docker_entry_test.sh
-    detach: no
-    interactive: yes
+    detach: "no"
+    interactive: "yes"
     volumes:
-    - "{{ base_dir }}/ansible:/code/ansible"
-    - "{{ base_dir }}/bin:/code/bin"
-    - "{{ base_dir }}/cm.sh:/code/cm.sh"
-    - "{{ base_dir }}/requirements.txt:/code/requirements.txt"
+      - "{{ base_dir }}/ansible:/code/ansible"
+      - "{{ base_dir }}/bin:/code/bin"
+      - "{{ base_dir }}/cm.sh:/code/cm.sh"
+      - "{{ base_dir }}/requirements.txt:/code/requirements.txt"
   register: dockerout
-#- name: smoketest | print output 
-#  debug: 
-#    msg: "{{ dockerout }}"
-- name: smoketest | stop container with test 
+- name: smoketest | stop container with test
   docker_container:
     name: cm.sh-test
     image: "{{ docker_image }}"
   state: absent
-

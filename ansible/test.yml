@@ -2,7 +2,7 @@
 - hosts: local
 
   vars_files:
-    - "{{ playbook_dir }}/variables.yml"
+  - "{{ playbook_dir }}/variables.yml"
 
   roles:
   - role: test
