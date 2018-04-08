@@ -14,13 +14,13 @@
 
 - name: Creates directory
   file:
-   path: "{{ backup_dir }}"
-   state: directory
+    path: "{{ backup_dir }}"
+    state: directory
 - name: gather hostname
   shell: hostname -f
   register: hostname
   tags:
-  - skip_ansible_lint
+    - skip_ansible_lint
 
 - name: gather backup files
   find:
@@ -33,7 +33,7 @@
     CM_CCRYPT_KEY: "{{ aws_s3_backup_encryption_passphrase }}"
   with_items: "{{ backup_files }}"
   tags:
-  - skip_ansible_lint
+    - skip_ansible_lint
 - name: gather enc backup files
   find:
     paths: "{{ backup_dir }}"
@@ -51,6 +51,3 @@
     state: absent
     path: "{{ item }}"
   with_items: "{{ backup_enc_files | json_query('files[*].path') }}"
-
-
-

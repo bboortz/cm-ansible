@@ -13,14 +13,12 @@
 
 - name: ArchLinux | update cache
   pacman:
-    update_cache: yes
-    force: yes
+    update_cache: "yes"
+    force: "yes"
 
 - name: ArchLinux | upgrade system
   pacman:
-    upgrade: yes
-    force: yes
-    recurse: yes
+    upgrade: "yes"
+    force: "yes"
+    recurse: "yes"
     state: present
-
-

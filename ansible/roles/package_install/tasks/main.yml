@@ -11,7 +11,5 @@
 
 - import_tasks: Debian.yml
   when: ansible_os_family == 'Debian'
-  tags: ["packages","common"]
 - import_tasks: Archlinux.yml
   when: ansible_os_family == 'Archlinux'
-  tags: ["packages","common"]
