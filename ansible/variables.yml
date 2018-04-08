@@ -1,5 +1,13 @@
 ---
 #
+# generic stuff
+#
+generic:
+  nothing: "by now"
+
+
+
+#
 # role "package_install" settings
 #
 
@@ -8,13 +16,18 @@ package_install:
   package_list:
     - bash-completion
     - bzip2
+    - ccrypt
     - curl
     - fail2ban
     - git
+    - gnupg
     - gzip
     - htop
     - lsof
     - ntp
+    - python
+    - python-virtualenv
+    - rkhunter
     - rsync
     - screen
     - strace
@@ -23,7 +36,13 @@ package_install:
     - unzip
     - vim
     - wget
+    - xdotool
     - zip 
+    - zsh
+  package_list_archlinux:
+    - keepass
+  package_list_debian:
+    - python-apt
 
 
 
@@ -37,10 +56,24 @@ ntp_client:
 
 #
 # role "test" settings
+#
 test:
   base_dir: "{{ playbook_dir }}/.."
 
-  
+
+
+#
+# role "backup" settings
+#
+backup:
+  backup_files:
+    - ~/.ssh
+    - ~/.vimrc
+    - ~/files
+    - ~/Documents
+    - ~/Pictures
+ 
+
 
 # user settings
 #user:

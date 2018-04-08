@@ -11,6 +11,12 @@
       package_list: "{{ package_install.package_list }}"
     - role: ntp_client
       ntp_server: "{{ ntp_client.ntp_server }}"
+
+#  roles:
+#    - role: package_install
+#      package_list: "{{ package_install.package_list_debian }}"
+#      when: ansible_os_family == 'Debian'
+
 #    - common       # List of essential packages
 #    - home         # prepare and configure home directory
 #    - docker       # install and configure docker

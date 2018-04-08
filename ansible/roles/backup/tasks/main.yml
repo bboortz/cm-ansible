@@ -1,0 +1,52 @@
+---
+# tasks file for backup---
+#
+- name: Role - backup
+  debug:
+    msg: "backup"
+    verbosity: 1
+- name: show parameter aws_s3_backup_encryption_passphrase
+  debug:
+    msg: "{{ aws_s3_backup_encryption_passphrase }}"
+- name: show parameter backup_files
+  debug:
+    msg: "{{ backup_files }}"
+
+- name: Creates directory
+  file: 
+   path: "{{ backup_dir }}"
+   state: directory
+- name: gather hostname
+  shell: hostname -f
+  register: hostname
+
+- name: gather backup files
+  find:
+    paths: "{{ backup_dir }}"
+    file_type: file
+  register: backup_enc_files
+- name: tar and encrypt file by file
+  shell: "src=$( readlink -f {{ item }} ); dst=${src//\\//_}.tar.bz2.ccrypt; tar -cj $src | ccencrypt -E CM_CCRYPT_KEY  >  {{ backup_dir }}/$dst"
+  environment: 
+    CM_CCRYPT_KEY: "{{ aws_s3_backup_encryption_passphrase }}"
+  with_items: "{{ backup_files }}"
+- name: gather enc backup files
+  find:
+    paths: "{{ backup_dir }}"
+    file_type: file
+  register: backup_enc_files
+- name: upload backup to s3 bucket
+  aws_s3:
+    bucket: private.local.backups
+    object: "/{{ hostname.stdout }}/{{ansible_date_time.iso8601}}/{{ item | regex_replace('^.*\\/(.+)$', '\\1') }}"
+    src: "{{ item }}"
+    mode: put
+  with_items: "{{ backup_enc_files | json_query('files[*].path') }}"
+- name: Clean local backup files
+  file:
+    state: absent
+    path: "{{ item }}"
+  with_items: "{{ backup_enc_files | json_query('files[*].path') }}"
+
+
+
