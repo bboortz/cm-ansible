@@ -126,7 +126,8 @@ f_test_playbook() {
 }
 
 f_playbook() {
-	local playbook="${ANSIBLEDIR}/${1}.yml"
+	local routine="${1}"
+	local playbook="${ANSIBLEDIR}/${routine}.yml"
 
 	if [ ! -f "${playbook}" ]; then
 		f_error "playbook not found: $playbook"
@@ -134,7 +135,15 @@ f_playbook() {
 	fi
 
 	f_test_playbook "${playbook}"
+
 	f_info "running playbook $playbook ..."
+	case $routine in
+		backup)
+			export ANSIBLE_INVENTORY="${ANSIBLEDIR}/hosts_backup"
+			;;
+		*)
+			;;
+	esac
 	cmd="ansible-playbook ${VERBOSE} ${CHECK} ${VAULT} -c local ${playbook}"
 	f_debug "using cmd: $cmd"
 	$cmd
@@ -148,7 +157,7 @@ f_playbook() {
 	# setting verbose mode if needed
 	if [ -n "${CM_DEBUG:-}" ]; then
 		f_info "debug mode on"
-		VERBOSE="-vvvv"
+		VERBOSE="-vvvvvv"
 	fi
 
 	# starting up

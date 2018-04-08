@@ -26,6 +26,14 @@
   - unittest
   - skip_ansible_lint
 
+#- name: unittest | check yaml files with yamllint
+#  shell: yamllint .
+#  args:
+#    chdir: "{{ playbook_dir }}/.."
+#  tags:
+#  - unittest
+#  - skip_ansible_lint
+
 - name: unittest | gather roles
   find:
     paths: "{{ playbook_dir }}/roles"

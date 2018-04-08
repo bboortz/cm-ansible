@@ -1,0 +1,12 @@
+---
+# tasks file for os---
+#
+- name: Role - debug
+  debug:
+    msg: "debug"
+    verbosity: 1
+- name: debug | Gather CM_DEBUG environment variable
+  set_fact:
+    cm_debug: "{{ lookup('env','CM_DEBUG') }}"
+- import_tasks: debug.yml
+  when: cm_debug != ''

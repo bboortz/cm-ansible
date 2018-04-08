@@ -31,5 +31,3 @@ script:
 
 notifications:
   # Notify Ansible Galaxy when a role builds successfully.
-
-

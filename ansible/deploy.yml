@@ -1,6 +1,6 @@
 ---
 - hosts: local
-  become: yes
+  become: "yes"
 
   vars_files:
     - "{{ playbook_dir }}/variables.yml"
@@ -26,4 +26,4 @@
 #    - golang       # golang and tools
 
 # https://github.com/briangershon/linux-desktop-ansible
-#- include: ../../linux-desktop-private/playbook.yml
+# - include: ../../linux-desktop-private/playbook.yml

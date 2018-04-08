@@ -5,6 +5,8 @@
   debug:
     msg: "test"
     verbosity: 1
+  debug:
+    var: ansible_python_interpreter
 
 - import_tasks: unittest.yml
   tags: [ "unittest" ]

@@ -17,12 +17,7 @@ ROOTDIR="${CURDIR%/*}"
 # program
 #
 
-echo ------------------------
-pwd
-ls -la
-ls -la /code
 export CM_DEBUG=1
-echo ------------------------
-CM_DRYRUN=1 ${ROOTDIR}/cm.sh deploy
 ${ROOTDIR}/bin/install_dependencies.sh 
+CM_DRYRUN=1 ${ROOTDIR}/cm.sh deploy
 ${ROOTDIR}/cm.sh deploy
