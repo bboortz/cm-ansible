@@ -1,9 +1,9 @@
 ---
 - hosts: local
+
   vars_files:
     - "{{ playbook_dir }}/variables.yml"
-    - "~/files/secrets/aws_s3_backup.yml"
-
+    - ["~/files/secrets/aws_s3_backup.yml", "{{ playbook_dir }}/roles/backup/vars/main.yml"]
 
   roles:
     - role: backup

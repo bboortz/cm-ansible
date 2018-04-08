@@ -7,5 +7,3 @@
   roles:
   - role: test.unittest
     base_dir: "{{ test.base_dir }}"
-  - role: test.smoketest
-    base_dir: "{{ test.base_dir }}"

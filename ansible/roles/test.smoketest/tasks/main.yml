@@ -6,9 +6,6 @@
     msg: "test"
     verbosity: 1
 
-- import_tasks: unittest.yml
-  tags:
-    - unittest
 - import_tasks: smoketest.yml
   tags:
-    - unittest
+    - smoketest
