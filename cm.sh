@@ -112,7 +112,7 @@ f_bootstrap() {
 	
 	else
 		f_info "creating virtualenv in $VENVDIR ..."
-		virtualenv "${VENVDIR}"
+		virtualenv --python=python2 "${VENVDIR}"
 		f_activate_venv
 		f_install_requirements
 
