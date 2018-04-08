@@ -1,0 +1,9 @@
+---
+- hosts: local
+
+  vars_files:
+  - "{{ playbook_dir }}/variables.yml"
+
+  roles:
+  - role: test.unittest
+    base_dir: "{{ test.base_dir }}"
