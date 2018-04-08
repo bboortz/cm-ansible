@@ -8,3 +8,4 @@ boto3
 botocore
 requests
 docker-py
+molecule

@@ -69,6 +69,7 @@ backup:
   backup_files:
     - ~/.ssh
     - ~/.vimrc
+    - ~/.zshrc
     - ~/files
     - ~/Documents
     - ~/Pictures

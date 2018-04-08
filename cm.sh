@@ -119,6 +119,12 @@ f_bootstrap() {
 	fi
 }
 
+f_test_playbook() {
+	local playbook="${1}"
+	f_info "testing playbook ${playbook} ..."
+	ansible-lint "${playbook}"
+}
+
 f_playbook() {
 	local playbook="${ANSIBLEDIR}/${1}.yml"
 
@@ -126,6 +132,8 @@ f_playbook() {
 		f_error "playbook not found: $playbook"
 		exit 1
 	fi
+
+	f_test_playbook "${playbook}"
 	f_info "running playbook $playbook ..."
 	cmd="ansible-playbook ${VERBOSE} ${CHECK} ${VAULT} -c local ${playbook}"
 	f_debug "using cmd: $cmd"
@@ -171,4 +179,6 @@ f_playbook() {
 	# running the playbook
 	f_playbook ${1}
 }
+
+
 
