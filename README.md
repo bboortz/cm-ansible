@@ -7,7 +7,7 @@ I wrote it to manage my own local infrastucture at home.
 ## Status
 
 ### Build
-<a href='https://travis-ci.org/sebdah/git-pylint-commit-hook'><img src='https://travis-ci.org/bboortz/cm-ansible.svg?branch=master'></a>
+<a href='https://travis-ci.org/bboortz/cm-ansible'><img src='https://travis-ci.org/bboortz/cm-ansible.svg?branch=master'></a>
 
 
 ### Tested for
