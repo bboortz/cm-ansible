@@ -71,6 +71,28 @@ backup:
     - ~/Pictures
 
 
+#
+# role "dotfiles" settings
+#
+dotfiles:
+  dotfiles_files:
+    - .gitconfig
+    - .gitexcludes
+    - .gitignore
+    - .noserc
+    - .screenrc
+    - .shellrc.aliases
+    - .shellrc.env
+    - .shellrc.functions
+    - .shellrc.golang
+    - .shellrc.host.wb-t500
+    - .shellrc.load
+    - .shellrc.prompt
+    - .shellrc.ssh
+    - .vimrc
+    - .zshrc
+
+
 # user settings
 # user:
 #   user_name: "{{ ansible_ssh_user }}"

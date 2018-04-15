@@ -1,0 +1,5 @@
+---
+# vars file for os
+dotfiles_git_repo: "https://github.com/bboortz/dotfiles.git"
+dotfiles_dest: "~/files/dotfiles"
+dotfiles_version: "8f92c15500c9f91b5a9b22d9fa76db58aa8eb8ed"

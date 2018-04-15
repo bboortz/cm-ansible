@@ -1,0 +1,9 @@
+---
+- hosts: local
+
+  vars_files:
+    - "{{ playbook_dir }}/variables.yml"
+
+  roles:
+    - role: dotfiles
+      dotfiles_files: "{{ dotfiles.dotfiles_files }}"

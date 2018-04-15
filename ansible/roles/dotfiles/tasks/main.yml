@@ -1,0 +1,21 @@
+---
+# tasks file for dotfiles
+#
+- name: Role - dotfiles
+  debug:
+    msg: "dotfiles"
+    verbosity: 1
+- name: dotfiles | clone dotfiles git repository
+  git:
+    repo: "{{ dotfiles_git_repo }}"
+    dest: "{{ dotfiles_dest }}"
+    version: "{{ dotfiles_version }}"
+- name: dotfiles | link dotfiles
+  file:
+    src: "{{ dotfiles_dest }}/{{ item }}"
+    dest: "~/{{ item }}"
+    state: link
+    force: "yes"
+  with_items: "{{ dotfiles_files }}"
+  tags:
+    - skip_ansible_lint
