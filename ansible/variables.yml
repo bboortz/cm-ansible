@@ -32,6 +32,7 @@ package_install:
     - strace
     - tar
     - tree
+    - tmux
     - unzip
     - vim
     - wget
