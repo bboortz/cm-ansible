@@ -138,8 +138,8 @@ f_playbook() {
 
 	f_info "running playbook $playbook ..."
 	case $routine in
-		backup)
-			export ANSIBLE_INVENTORY="${ANSIBLEDIR}/hosts_backup"
+		user.*)
+			export ANSIBLE_INVENTORY="${ANSIBLEDIR}/hosts_user"
 			;;
 		*)
 			;;

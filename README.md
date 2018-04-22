@@ -40,9 +40,14 @@ sudo ./bin/install_dependencies.sh
 sudo ./cm.sh deploy
 ```
 
-* Running backup playbook
+* Running user backup playbook
 ```bash
-./cm.sh backup
+./cm.sh user.backup
+```
+
+* Running user playbook
+```bash
+./cm.sh user.deploy
 ```
 
 
