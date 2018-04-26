@@ -1,0 +1,44 @@
+#---
+#short_description: deploy server
+#scope: public
+#description: >
+#  deploy some server via ansible + teraform
+
+---
+
+- hosts: localhost
+  tasks:
+    - name: debugging hostvars
+      debug:
+        msg: "{{ hostvars}}"
+    - name: debugging groups
+      debug:
+        msg: "{{ groups }}"
+    - name: set facts bastion private ip
+      set_fact:
+        bastion_private_ip: "{{ groups['bastion'][0] }}"
+    - name: set facts bastion
+      set_fact:
+        ssh_has_bastion: "{{ 'bastion' in groups }}"
+        ssh_bastion_ip: "{{ hostvars[bastion_private_ip]['ansible_ssh_host'] }}"
+        ssh_bastion_user: "ubuntu"
+        ansible_ssh_extra_args: "-F ssh-bastion.conf -o ControlMaster=auto -o ControlPersist=30m"
+#    - name: set facts bastion private ip
+#      set_fact:
+#        bastion_private_ip: "{{ groups['bastion'][0] }}"
+#    - name: set facts bastion public ip
+#      set_fact:
+#        bastion_public_ip: "{{ hostvars[bastion_private_ip]['public_ip'] }}"
+    - name: debugging groups bastion
+      debug:
+        msg: "{{ bastion_private_ip }}"
+    - name: create ssh bastion conf
+      template:
+        src: ssh-bastion.conf
+        dest: "ssh-bastion.conf"
+
+- hosts: bastion, lb
+  tasks:
+    - name: ping
+      ping:
+

@@ -55,7 +55,6 @@ class DynamicInventory(object):
 
 
 
-
 class TerraformDynamicInventory(object):
 
     def __init__(self):
@@ -66,22 +65,35 @@ class TerraformDynamicInventory(object):
         self.inventory.print_json()
 
 
-    def add_group(self, attributes):
+    def add_group(self, attributes, vars=[]):
         if 'tags.Group' in attributes and 'private_ip' in attributes:
             tags_group = attributes['tags.Group']
             private_ip = attributes['private_ip']
-            self.inventory.add_group(tags_group, [ private_ip ])
+            self.inventory.add_group(tags_group, [ private_ip ], vars)
 
 
-    def add_tag(self, attributes, attribute):
-        if 'tags.Name' in attributes and attribute in attributes:
-            tags_name = attributes['tags.Name']
+    def add_host_var(self, attributes, attribute):
+        if 'private_ip' in attributes and attribute in attributes:
+            host = attributes['private_ip']
             value = attributes[attribute]
-            self.inventory.add_host_var(tags_name, attribute, value)
+            self.inventory.add_host_var(host, attribute, value)
 
+    def add_ansible_ssh_host(self, attributes):
+        attribute = 'tags.is_bastion'
+        if 'private_ip' in attributes and attribute in attributes:
+            if 'is_bastion' in attributes:
+                is_bastion = attributes['tags.is_bastion'] == 'True'
+            else:
+                is_bastion = False
 
-    def add_host_var(self, host_name, key, value):
-        self.inventory.add_host_var(host_name, key, value)
+            host = attributes['private_ip']
+            attribute = 'ansible_ssh_host'
+            if is_bastion:
+                value = attributes['public_ip']
+            else:
+                value = attributes['private_ip']
+            self.inventory.add_host_var(host, attribute, value)
+
 
 
     def parse_tfstate_file(self, filename):
@@ -95,13 +107,9 @@ class TerraformDynamicInventory(object):
 
             if resource['type'] == "aws_instance":
                 self.add_group(attributes)
-                self.add_tag(attributes, 'public_ip')
-                self.add_tag(attributes, 'tags.is_bastion')
-
-        #print ( json.dumps(resources, indent=4, sort_keys=True) )
-
-
-
+                self.add_host_var(attributes, 'tags.is_bastion')
+                self.add_host_var(attributes, 'public_ip')
+                self.add_ansible_ssh_host(attributes)
 
 
 

@@ -1,0 +1,19 @@
+#---
+#short_description: deploy server
+#scope: public
+#description: >
+#  deploy some server via ansible + teraform
+
+---
+
+- hosts: localhost
+  vars:
+    rootdir: "{{lookup('env', 'ROOTDIR')}}"
+  tasks:
+    - name: deploy via terraform
+      terraform:
+        binary_path: "{{ rootdir }}/./terraform/bin/terraform"
+        project_path: "{{ rootdir }}/terraform/server/"
+        state_file: "{{ rootdir }}/terraform/server/terraform.tfstate"
+        variables_file: "{{ rootdir }}/terraform/server/config.tfvars"
+

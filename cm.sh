@@ -12,12 +12,12 @@ export PS1='$ '
 
 # directories
 CURDIR="$( readlink -f ${0%/*} )"
-ROOTDIR="${CURDIR}"
+export ROOTDIR="${CURDIR}"
 VENVDIR="${ROOTDIR}/.venv"
 ANSIBLEDIR="${ROOTDIR}/ansible"
 
 # ansible
-export ANSIBLE_INVENTORY="${ANSIBLEDIR}/hosts"
+#export ANSIBLE_INVENTORY="${ANSIBLEDIR}/hosts"
 export ANSIBLE_ROLES_PATH="${ANSIBLEDIR}/roles"
 
 # additional
@@ -144,7 +144,7 @@ f_playbook() {
 		*)
 			;;
 	esac
-	cmd="ansible-playbook ${VERBOSE} ${CHECK} ${VAULT} -c local ${playbook}"
+	cmd="ansible-playbook -i inventory.py ${VERBOSE} ${CHECK} ${VAULT} -c local ${playbook}"
 	f_debug "using cmd: $cmd"
 	$cmd
 }
