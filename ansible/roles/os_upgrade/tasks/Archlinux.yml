@@ -9,7 +9,7 @@
 
 - name: ArchLinux | check - if lockfile exists?
   meta: end_play
-  when: stat_result.stat.exists == True
+  when: stat_result.stat.exists
 
 - name: ArchLinux | update cache
   pacman:

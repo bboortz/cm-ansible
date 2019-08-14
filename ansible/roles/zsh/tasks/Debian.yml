@@ -3,4 +3,7 @@
   debug:
     msg: "Debian"
 - name: Debian | Install list of packages
-  apt: state=present pkg="{{ package_list }}"
+  apt:
+    pkg:
+      - zsh
+    state: present

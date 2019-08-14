@@ -21,7 +21,7 @@ export ANSIBLE_INVENTORY="${ANSIBLEDIR}/hosts"
 export ANSIBLE_ROLES_PATH="${ANSIBLEDIR}/roles"
 
 # additional
-source /etc/*release
+source /etc/os-release
 VERBOSE="-vv"
 CHECK=""
 VAULT=""

@@ -12,4 +12,7 @@
   when: stat_result.stat.exists
 
 - name: ArchLinux | Install list of packages
-  pacman: state=present pkg="{{ package_list }}"
+  pacman:
+    pkg:
+      - zsh
+    state: present

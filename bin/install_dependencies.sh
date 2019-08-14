@@ -47,7 +47,7 @@ f_install_packages_arch() {
 			f_info "known operating system detected: $OS"
 			f_install_packages_deb
 			;;
-		arch)
+		arch|manjaro)
 			f_info "known operating system detected: $OS"
 			which python > /dev/null 2>&1 && which virtualenv > /dev/null 2>&1 || f_install_packages_arch
 			;;
